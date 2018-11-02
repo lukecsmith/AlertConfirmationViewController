@@ -64,23 +64,15 @@
 		42029A9C2111F14800B07031 /* AlertConfirmationDemo */ = {
 			isa = PBXGroup;
 			children = (
-				42029AB02111F22200B07031 /* AlertConfirmationViewController */,
-				42029AAF2111F17800B07031 /* View */,
 				42029A9D2111F14800B07031 /* AppDelegate.swift */,
 				42029A9F2111F14800B07031 /* ViewController.swift */,
+				42029AB02111F22200B07031 /* AlertConfirmationViewController */,
 				42029AA12111F14800B07031 /* Main.storyboard */,
 				42029AA42111F14C00B07031 /* Assets.xcassets */,
 				42029AA62111F14C00B07031 /* LaunchScreen.storyboard */,
 				42029AA92111F14C00B07031 /* Info.plist */,
 			);
 			path = AlertConfirmationDemo;
-			sourceTree = "<group>";
-		};
-		42029AAF2111F17800B07031 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		42029AB02111F22200B07031 /* AlertConfirmationViewController */ = {

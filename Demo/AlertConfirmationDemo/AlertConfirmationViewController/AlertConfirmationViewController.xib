@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlertConfirmationViewController" customModule="Sensium_Demo" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlertConfirmationViewController" customModule="AlertConfirmationDemo" customModuleProvider="target">
             <connections>
                 <outlet property="actionViewHeight" destination="Xdz-eB-THq" id="Rhf-an-hN9"/>
-                <outlet property="button1" destination="rHO-lY-MMV" id="s7P-kj-R4r"/>
-                <outlet property="button2" destination="ddh-Ys-Cpa" id="TfY-gu-pf3"/>
-                <outlet property="button3" destination="hJ1-nd-WWs" id="Zei-um-Kt0"/>
+                <outlet property="button0" destination="rHO-lY-MMV" id="jbY-rS-GsK"/>
+                <outlet property="button1" destination="ddh-Ys-Cpa" id="gcR-Ho-ihH"/>
+                <outlet property="button2" destination="hJ1-nd-WWs" id="9RY-jm-y0h"/>
                 <outlet property="buttonsView" destination="vAK-EL-djZ" id="Wei-MB-jLA"/>
                 <outlet property="messageLabel" destination="r3C-nJ-Uwv" id="8Py-8q-YX6"/>
                 <outlet property="spinner" destination="gtO-Y6-aIi" id="8c4-fD-UeR"/>
@@ -33,8 +33,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0f-I0-qCA" customClass="BorderView" customModule="Sensium_Demo" customModuleProvider="target">
-                    <rect key="frame" x="67" y="250.5" width="240" height="165"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0f-I0-qCA" customClass="BorderView" customModule="AlertConfirmationDemo" customModuleProvider="target">
+                    <rect key="frame" x="67.5" y="251" width="240" height="165"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Co0-4Z-E4R" userLabel="alphaView">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="165"/>
@@ -89,7 +89,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vAK-EL-djZ">
                                     <rect key="frame" x="0.0" y="0.0" width="240" height="48"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHO-lY-MMV" customClass="BorderButton" customModule="Sensium_Demo" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHO-lY-MMV" customClass="BorderButton" customModule="AlertConfirmationDemo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="80" height="48"/>
                                             <state key="normal" title="Button"/>
                                             <userDefinedRuntimeAttributes>
@@ -101,10 +101,10 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="button1Clicked:" destination="-1" eventType="touchUpInside" id="nlO-qd-g07"/>
+                                                <action selector="button0Clicked:" destination="-1" eventType="touchUpInside" id="r1C-fp-y9k"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddh-Ys-Cpa" customClass="BorderButton" customModule="Sensium_Demo" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddh-Ys-Cpa" customClass="BorderButton" customModule="AlertConfirmationDemo" customModuleProvider="target">
                                             <rect key="frame" x="80" y="0.0" width="80" height="48"/>
                                             <state key="normal" title="Button"/>
                                             <userDefinedRuntimeAttributes>
@@ -116,10 +116,10 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="button2Clicked:" destination="-1" eventType="touchUpInside" id="rYL-Qf-7WX"/>
+                                                <action selector="button1Clicked:" destination="-1" eventType="touchUpInside" id="qBE-Kz-eWC"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJ1-nd-WWs" customClass="BorderButton" customModule="Sensium_Demo" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJ1-nd-WWs" customClass="BorderButton" customModule="AlertConfirmationDemo" customModuleProvider="target">
                                             <rect key="frame" x="160" y="0.0" width="80" height="48"/>
                                             <state key="normal" title="Button"/>
                                             <userDefinedRuntimeAttributes>
@@ -131,7 +131,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="button3Clicked:" destination="-1" eventType="touchUpInside" id="h8s-kp-bE3"/>
+                                                <action selector="button2Clicked:" destination="-1" eventType="touchUpInside" id="MuY-b2-Frj"/>
                                             </connections>
                                         </button>
                                     </subviews>

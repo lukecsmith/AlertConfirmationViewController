@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 
 protocol AlertConfirmationDelegate: class {
-    func button1Clicked()
-    func button2Clicked()
-    func button3Clicked()
+    func buttonClicked(_ no: Int)
 }
 
 enum AlertConfirmationMode {
@@ -30,45 +28,42 @@ class AlertConfirmationViewController: UIViewController {
             self.modeChanged()
         }
     }
+    var titleText = "set a title"
+    var messageText = "set a message"
+    var btn0Text = "Ok"
+    var btn1Text : String?
+    var btn2Text : String?
+    var failedTitleText = "set failure title"
+    var failedMessageText = "set failure message"
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var button0: UIButton!
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
-    @IBOutlet weak var button3: UIButton!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var successImage: UIImageView!
     @IBOutlet weak var buttonsView: UIStackView!
     @IBOutlet weak var actionViewHeight: NSLayoutConstraint!
-    var failedTitle: String?
-    var failedMessage: String?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupView()
         self.showActionView(open: false, animated: false)
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func setupWith(title: String, message: String, button1Title: String, button2Title: String?, button3Title: String?, failureTitle: String?, failureMessage: String?, delegate: AlertConfirmationDelegate?) {
-        self.titleLabel.text = title
-        self.messageLabel.text = message
-        self.button1.setTitle(button1Title, for: .normal)
-        if let title2 = button2Title {
+    func setupView() {
+        self.titleLabel.text = self.titleText
+        self.messageLabel.text = self.messageText
+        self.button0.setTitle(self.btn0Text, for: .normal)
+        if let title1 = self.btn1Text {
+            self.button1.setTitle(title1, for: .normal)
+        } else {
+            self.button1.removeFromSuperview()
+        }
+        if let title2 = self.btn2Text {
             self.button2.setTitle(title2, for: .normal)
         } else {
             self.button2.removeFromSuperview()
         }
-        if let title3 = button3Title {
-            self.button3.setTitle(title3, for: .normal)
-        } else {
-            self.button3.removeFromSuperview()
-        }
-        self.delegate = delegate
-        self.failedTitle = failureTitle
-        self.failedMessage = failureMessage
     }
     
     func modeChanged() {
@@ -87,8 +82,8 @@ class AlertConfirmationViewController: UIViewController {
             self.spinner.isHidden = true
             self.successImage.isHidden = false
             self.successImage.image = UIImage(named: "cancel-square-128")
-            self.titleLabel.text = self.failedTitle
-            self.messageLabel.text = self.failedMessage
+            self.titleLabel.text = self.failedTitleText
+            self.messageLabel.text = self.failedMessageText
             self.buttonsView.isUserInteractionEnabled = true
         case .success:
             self.spinner.isHidden = true
@@ -113,20 +108,28 @@ class AlertConfirmationViewController: UIViewController {
         }
     }
     
-    @IBAction func button1Clicked(_ sender: Any) {
+    func setSuccessThenPauseThenDismiss(milliseconds: Int) {
+        self.mode = .success
+        //after another delay, remove the AlertConfirmVC
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(milliseconds), execute: {
+            self.dismiss(animated: true, completion: nil)
+        })
+    }
+    
+    @IBAction func button0Clicked(_ sender: Any) {
         if let delegate = self.delegate {
-            delegate.button1Clicked()
+            delegate.buttonClicked(0)
         } else {
             self.dismiss(animated: true, completion: nil)
         }
     }
     
-    @IBAction func button2Clicked(_ sender: Any) {
-        self.delegate?.button2Clicked()
+    @IBAction func button1Clicked(_ sender: Any) {
+        self.delegate?.buttonClicked(1)
     }
     
-    @IBAction func button3Clicked(_ sender: Any) {
-        self.delegate?.button3Clicked()
+    @IBAction func button2Clicked(_ sender: Any) {
+        self.delegate?.buttonClicked(2)
     }
     
 }

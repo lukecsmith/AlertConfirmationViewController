@@ -25,38 +25,37 @@ class ViewController: UIViewController {
     @IBAction func triggerAlertClicked(_ sender: Any) {
         self.alertConfirmVC = AlertConfirmationViewController(nibName: "AlertConfirmationViewController", bundle: nil)
         self.alertConfirmVC.modalPresentationStyle = .overCurrentContext //ensures clear background possible
-        let title = NSLocalizedString("Do Action?", comment: "")
-        let message = NSLocalizedString("Are you sure you want to do this particular thing?", comment: "")
-        let ok = NSLocalizedString("OK", comment: "")
-        let cancel = NSLocalizedString("Cancel", comment: "")
-        let failedTitle = NSLocalizedString("Task Failed", comment: "")
-        let failedMessage = NSLocalizedString("We were unable to complete this task", comment: "")
-        self.present(self.alertConfirmVC, animated: false, completion: {
-            self.alertConfirmVC.setupWith(title: title, message: message, button1Title: ok, button2Title: cancel, button3Title: nil, failureTitle: failedTitle, failureMessage: failedMessage, delegate: self)
+        self.alertConfirmVC.titleText = NSLocalizedString("Do Action?", comment: "")
+        self.alertConfirmVC.messageText = NSLocalizedString("Are you sure you want to do this particular thing?", comment: "")
+        self.alertConfirmVC.btn0Text = NSLocalizedString("OK", comment: "")
+        self.alertConfirmVC.btn1Text = NSLocalizedString("Cancel", comment: "")
+        self.alertConfirmVC.failedTitleText = NSLocalizedString("Task Failed", comment: "")
+        self.alertConfirmVC.failedMessageText = NSLocalizedString("We were unable to complete this task", comment: "")
+        self.alertConfirmVC.delegate = self
+        self.present(self.alertConfirmVC, animated: false, completion: nil)
+    }
+    func okAction() {
+        //action to be executed if ok is clicked.  for this example, just a pause before setting dialogue to 'success'
+        
+        //after a delay for some kind of task happening, set it to success
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(2), execute: {
+            self.alertConfirmVC.setSuccessThenPauseThenDismiss(milliseconds: 2000)
         })
     }
 }
 
 extension ViewController: AlertConfirmationDelegate {
-    func button1Clicked() {
-        //ok clicked
-        //set it to spinning
-        self.alertConfirmVC.mode = .spinning
-        //after a delay for some kind of task happening, set it to success
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(2), execute: {
-            self.alertConfirmVC.mode = .success
-            //after another delay, remove the AlertConfirmVC
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(2), execute: {
-                self.alertConfirmVC.dismiss(animated: true, completion: nil)
-            })
-        })
-    }
-    func button2Clicked() {
-        //cancel clicked
-        self.alertConfirmVC.dismiss(animated: true, completion: nil)
-    }
-    func button3Clicked() {
-        //unused
+    func buttonClicked(_ no: Int) {
+        if no == 0 {
+            //ok clicked
+            //set it to spinning and perform action associated with ok
+            self.alertConfirmVC.mode = .spinning
+            self.okAction()
+        }
+        if no == 1 {
+            //cancel clicked
+            self.alertConfirmVC.dismiss(animated: true, completion: nil)
+        }
     }
 }
 
