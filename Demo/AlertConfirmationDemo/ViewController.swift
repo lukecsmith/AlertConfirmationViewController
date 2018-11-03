@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var alertConfirmVC: AlertConfirmationViewController!
+    weak var alertConfirmVC: AlertConfirmationViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,23 +23,24 @@ class ViewController: UIViewController {
     }
 
     @IBAction func triggerAlertClicked(_ sender: Any) {
-        self.alertConfirmVC = AlertConfirmationViewController(nibName: "AlertConfirmationViewController", bundle: nil)
-        self.alertConfirmVC.modalPresentationStyle = .overCurrentContext //ensures clear background possible
-        self.alertConfirmVC.titleText = NSLocalizedString("Do Action?", comment: "")
-        self.alertConfirmVC.messageText = NSLocalizedString("Are you sure you want to do this particular thing?", comment: "")
-        self.alertConfirmVC.btn0Text = NSLocalizedString("OK", comment: "")
-        self.alertConfirmVC.btn1Text = NSLocalizedString("Cancel", comment: "")
-        self.alertConfirmVC.failedTitleText = NSLocalizedString("Task Failed", comment: "")
-        self.alertConfirmVC.failedMessageText = NSLocalizedString("We were unable to complete this task", comment: "")
-        self.alertConfirmVC.delegate = self
-        self.present(self.alertConfirmVC, animated: false, completion: nil)
+        let alertConfirmVC = AlertConfirmationViewController(nibName: "AlertConfirmationViewController", bundle: nil)
+        alertConfirmVC.modalPresentationStyle = .overCurrentContext //ensures clear background possible
+        alertConfirmVC.titleText = NSLocalizedString("Do Action?", comment: "")
+        alertConfirmVC.messageText = NSLocalizedString("Are you sure you want to do this particular thing?", comment: "")
+        alertConfirmVC.btn0Text = NSLocalizedString("OK", comment: "")
+        alertConfirmVC.btn1Text = NSLocalizedString("Cancel", comment: "")
+        alertConfirmVC.failedTitleText = NSLocalizedString("Task Failed", comment: "")
+        alertConfirmVC.failedMessageText = NSLocalizedString("We were unable to complete this task", comment: "")
+        alertConfirmVC.delegate = self
+        self.present(alertConfirmVC, animated: false, completion: nil)
+        self.alertConfirmVC = alertConfirmVC
     }
     func okAction() {
         //action to be executed if ok is clicked.  for this example, just a pause before setting dialogue to 'success'
         
         //after a delay for some kind of task happening, set it to success
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(2), execute: {
-            self.alertConfirmVC.setSuccessThenPauseThenDismiss(milliseconds: 2000)
+            self.alertConfirmVC?.setSuccessThenPauseThenDismiss(milliseconds: 2000)
         })
     }
 }
@@ -49,12 +50,12 @@ extension ViewController: AlertConfirmationDelegate {
         if no == 0 {
             //ok clicked
             //set it to spinning and perform action associated with ok
-            self.alertConfirmVC.mode = .spinning
+            self.alertConfirmVC?.mode = .spinning
             self.okAction()
         }
         if no == 1 {
             //cancel clicked
-            self.alertConfirmVC.dismiss(animated: true, completion: nil)
+            self.alertConfirmVC?.dismiss(animated: true, completion: nil)
         }
     }
 }
